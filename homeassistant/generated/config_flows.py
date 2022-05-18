@@ -153,6 +153,7 @@ FLOWS = {
         "homematicip_cloud",
         "homewizard",
         "honeywell",
+        "hongkongobservatory",
         "huawei_lte",
         "hue",
         "huisbaasje",

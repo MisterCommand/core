@@ -1,4 +1,4 @@
-DOMAIN = "hko"
+DOMAIN = "hongkongobservatory"
 
 DISTRICT = "name"
 COORDINATOR = "coordinator"
