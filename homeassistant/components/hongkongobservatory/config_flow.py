@@ -1,6 +1,9 @@
 import logging
 import voluptuous as vol
+from hko import HKO, HKOError
+from async_timeout import timeout
 from homeassistant import config_entries
+from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
 from .const import (CONF_LOCATION, DEFAULT_LOCATION,
                     DOMAIN, LOCATIONS)
@@ -20,11 +23,23 @@ class HongKongObservatoryConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
     async def async_step_user(self, user_input=None):
 
+        errors = {}
+
         if user_input is not None:
-            await self.async_set_unique_id(user_input[CONF_LOCATION], raise_on_progress=False)
-            return self.async_create_entry(
-                title=user_input[CONF_LOCATION], data=user_input
-            )
+            session = async_get_clientsession(self.hass)
+            try:
+                async with timeout(10):
+                    hko = HKO(session)
+                    await hko.weather("rhrread")
+            except (HKOError):
+                errors["base"] = "cannot_connect"
+            else:
+                await self.async_set_unique_id(user_input[CONF_LOCATION], raise_on_progress=False)
+                return self.async_create_entry(
+                    title=user_input[CONF_LOCATION], data=user_input
+                )
+        
+
 
         # Form Structure
         # Input Labels In translations/en.json
@@ -36,4 +51,4 @@ class HongKongObservatoryConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             }
         )
 
-        return self.async_show_form(step_id="user", data_schema=data_schema)
+        return self.async_show_form(step_id="user", data_schema=data_schema, errors=errors)
