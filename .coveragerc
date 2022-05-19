@@ -493,6 +493,9 @@ omit =
     homeassistant/components/homeworks/*
     homeassistant/components/honeywell/__init__.py
     homeassistant/components/honeywell/climate.py
+    homeassistant/components/hongkongobservatory/__init__.py
+    homeassistant/components/hongkongobservatory/const.py
+    homeassistant/components/hongkongobservatory/weather.py
     homeassistant/components/horizon/media_player.py
     homeassistant/components/hp_ilo/sensor.py
     homeassistant/components/huawei_lte/__init__.py
