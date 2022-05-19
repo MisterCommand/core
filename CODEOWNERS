@@ -451,6 +451,7 @@ build.json @home-assistant/supervisor
 /tests/components/homewizard/ @DCSBL
 /homeassistant/components/honeywell/ @rdfurman
 /tests/components/honeywell/ @rdfurman
+/homeassistant/components/hongkongobservatory/ @MisterCommand
 /homeassistant/components/http/ @home-assistant/core
 /tests/components/http/ @home-assistant/core
 /homeassistant/components/huawei_lte/ @scop @fphammerle
